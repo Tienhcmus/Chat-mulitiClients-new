@@ -1,5 +1,6 @@
 package phase1;
  
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -223,32 +224,41 @@ public class ServerView {
      */
     private void initialize() { //here components of Swing App UI are initilized
         frame = new JFrame();
-        frame.setBounds(100, 100, 796, 530);
+        
+        frame.setBounds(100, 100, 465, 530);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setBackground(Color.orange);
+        frame.setResizable(false);
         frame.getContentPane().setLayout(null);
         frame.setTitle("Server View");
+       
 
+        JLabel lblStatus = new JLabel("STATUS:");
+        lblStatus.setHorizontalAlignment(SwingConstants.LEFT);
+        lblStatus.setBounds(12, 29, 98, 23);
+        frame.getContentPane().add(lblStatus);
+        
         serverMessageBoard = new JTextArea();
         serverMessageBoard.setEditable(false);
-        serverMessageBoard.setBounds(12, 29, 489, 435);
+        serverMessageBoard.setBounds(12, 57, 200, 406);
         frame.getContentPane().add(serverMessageBoard);
         serverMessageBoard.setText("Starting the Server...\n");
 
         allUserNameList = new JList();
-        allUserNameList.setBounds(526, 324, 218, 140);
+        allUserNameList.setBounds(226, 308, 218, 156);
         frame.getContentPane().add(allUserNameList);
 
         activeClientList = new JList();
-        activeClientList.setBounds(526, 78, 218, 156);
+        activeClientList.setBounds(226, 90, 218, 156);
         frame.getContentPane().add(activeClientList);
 
-        JLabel lblNewLabel = new JLabel("All Usernames");
+        JLabel lblNewLabel = new JLabel("ALL USERNAME:");
         lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
-        lblNewLabel.setBounds(530, 295, 127, 16);
+        lblNewLabel.setBounds(230, 278, 127, 16);
         frame.getContentPane().add(lblNewLabel);
 
-        JLabel lblNewLabel_1 = new JLabel("Active Users");
-        lblNewLabel_1.setBounds(526, 53, 98, 23);
+        JLabel lblNewLabel_1 = new JLabel("ACTIVE USER:");
+        lblNewLabel_1.setBounds(226, 57, 98, 23);
         frame.getContentPane().add(lblNewLabel_1);
 
     }
