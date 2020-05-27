@@ -69,12 +69,11 @@ public class LoginClient extends JFrame{
                 frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
 		frame.setTitle("Client Register");
-          
-                
 		clientUserName = new JTextField();
 		clientUserName.setBounds(207, 50, 276, 61);
-                clientUserName.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		clientUserName.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		frame.getContentPane().add(clientUserName);
+		frame.setResizable(false);
 		clientUserName.setColumns(10);
 
 		JButton clientLoginBtn = new JButton("Login");

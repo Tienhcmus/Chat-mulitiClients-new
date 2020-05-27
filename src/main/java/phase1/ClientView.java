@@ -1,5 +1,6 @@
 package phase1;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.DataInputStream;
@@ -9,17 +10,8 @@ import java.net.Socket;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import javax.swing.ButtonGroup;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JRadioButton;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+import javax.swing.*;
+import javax.xml.bind.JAXBPermission;
 
 
 public class ClientView extends JFrame {
@@ -27,9 +19,9 @@ public class ClientView extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
-	private JTextField clientTypingBoard;
+	//private JTextField clientTypingBoard;
 	private JList clientActiveUsersList;
-	private JTextArea clientMessageBoard;
+	private JTextArea clientMessageBoard, clientTypingBoard;
 	private JButton clientKillProcessBtn;
 	private JRadioButton oneToNRadioBtn;
 	private JRadioButton broadcastBtn;
@@ -96,21 +88,27 @@ public class ClientView extends JFrame {
 	 */
 	private void initialize() { // initialize all the components of UI
 		frame = new JFrame();
+		JScrollPane scrolltype = new JScrollPane();
+		JScrollPane scrollboard = new JScrollPane();
 		frame.setBounds(100, 100, 926, 705);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setTitle("Client View");
 
+
 		clientMessageBoard = new JTextArea();
 		clientMessageBoard.setEditable(false);
-		clientMessageBoard.setBounds(12, 25, 530, 495);
-		frame.getContentPane().add(clientMessageBoard);
+		clientMessageBoard.setLineWrap(true);
+		scrollboard.setBounds(12, 25, 530, 495);
+		scrollboard.getViewport().add(clientMessageBoard);
+		frame.getContentPane().add(scrollboard);
 
-		clientTypingBoard = new JTextField();
-		clientTypingBoard.setHorizontalAlignment(SwingConstants.LEFT);
-		clientTypingBoard.setBounds(12, 533, 530, 84);
-		frame.getContentPane().add(clientTypingBoard);
-		clientTypingBoard.setColumns(10);
+		clientTypingBoard = new JTextArea();
+		clientTypingBoard.setEditable(true);
+		clientTypingBoard.setLineWrap(true);
+		scrolltype.setBounds(12, 533, 530, 84);
+		scrolltype.getViewport().add(clientTypingBoard);
+		frame.getContentPane().add(scrolltype);
 
 		JButton clientSendMsgBtn = new JButton("Send");
 		clientSendMsgBtn.addActionListener(new ActionListener() { // action to be taken on send message button
@@ -193,6 +191,7 @@ public class ClientView extends JFrame {
 				clientActiveUsersList.setEnabled(true);
 			}
 		});
+
 		oneToNRadioBtn.setSelected(true);
 		oneToNRadioBtn.setBounds(682, 24, 72, 25);
 		frame.getContentPane().add(oneToNRadioBtn);
@@ -209,7 +208,7 @@ public class ClientView extends JFrame {
 		ButtonGroup btngrp = new ButtonGroup();
 		btngrp.add(oneToNRadioBtn);
 		btngrp.add(broadcastBtn);
-
+		frame.setResizable(false);
 		frame.setVisible(true);
 	}
 }
